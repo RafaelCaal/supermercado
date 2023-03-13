@@ -1,0 +1,38 @@
+#formularioIngreso{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}
+
+#botonSubmit{
+    width: 1000;
+}
+
+.formClass{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    text-align: center;
+}
+
+#respuesta{
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+}
+
+#salir{
+    text-align: center; 
+    text-justify: distribute;
+    height: 20px;
+    width: 80px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+    padding: 20px;
+    min-height: 10vh;
+}

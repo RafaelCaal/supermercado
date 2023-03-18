@@ -3,7 +3,7 @@ var usuario = document.getElementById('usuarioIngreso')
 var password = document.getElementById('passwordIngreso')
 
 ingreso.addEventListener('submit',function(recibeIngreso){
-    //recibeIngreso.preventDefault();
+    recibeIngreso.preventDefault();
     console.log(usuario.value)
     console.log(password.value)
 
@@ -13,7 +13,19 @@ ingreso.addEventListener('submit',function(recibeIngreso){
 
     //Si falla autenticacion mostramos alerta
     window.comunicacion.recibeMensaje(function(event,args){
-        alert(args)
+        //alert(args)
+        //dialog.showErrorBox("Error de Autenticacion", args);
+        document.getElementById('usuarioIngreso').focus();
+        let error = document.getElementById('loginFail')
+        error.innerHTML = "CREDENCIALES INVALIDAS"
+        if(usuario.focus()){
+            usuario.value = ""
+            password.value = ""
+        }
+        setTimeout(() => {
+            error.innerHTML = "  "
+          }, "2000");
+
     })
 
 })

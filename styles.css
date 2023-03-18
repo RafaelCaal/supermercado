@@ -27,7 +27,7 @@
 #salir{
     text-align: center; 
     text-justify: distribute;
-    height: 20px;
+    height: 15px;
     width: 80px;
     position: fixed;
     bottom: 0;
@@ -35,4 +35,14 @@
     margin: 30px;
     padding: 20px;
     min-height: 10vh;
+}
+
+#loginFail{
+    text-align: center; 
+    font-weight: bold;
+    color: red;
+}
+
+#encabezado{
+    text-align: center;
 }

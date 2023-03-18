@@ -1,4 +1,5 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, dialog, BrowserWindow, ipcMain} = require('electron')
+
 const path = require('path')
 
 let ventana;
@@ -17,6 +18,7 @@ function createWindow(){
         }
     });
     ventana.loadFile('index.html')
+    ventana.openDevTools()
 }
 
 function createWindowDos(){

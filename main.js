@@ -18,7 +18,7 @@ function createWindow(){
         }
     });
     ventana.loadFile('index.html')
-    ventana.openDevTools()
+    //ventana.openDevTools()
 }
 
 // VENTANA PRODUCTO INICIO

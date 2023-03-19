@@ -19,10 +19,7 @@ window.comunicacion.recibeProveedor(function(event,args){
     botonGuardar.addEventListener('click', function(){
         var prueba = args['codigo']
         console.log(prueba)
-    })
-
-    
-    
+    })    
 })
 
 

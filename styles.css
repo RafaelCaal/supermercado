@@ -1,3 +1,4 @@
+/* INICIO ventana Login */
 #formularioIngreso{
     position: absolute;
     top: 30%;
@@ -7,54 +8,71 @@
     width: 100px;
     height: 100px;
 }
-
-#botonSubmit{
-    width: 1000;
-}
-
-.formClass{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-    text-align: center;
-}
-
-.selector{
-    vertical-align: middle;
-}
-
 #respuesta{
     text-align: center;
     font-size: large;
     font-weight: bold;
 }
-
-#salir{
+#loginFail{
     text-align: center; 
-    text-justify: distribute;
-    height: 15px;
-    width: 80px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 30px;
-    padding: 20px;
-    min-height: 10vh;
+    font-weight: bold;
+    color: red;
 }
+#botonSubmit{
+    width: 1000;
+}
+/* FIN ventana Login */
 
-#editar{
+/* INICIO ventana producto */
+.formClass{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    text-align: center;
+}
+#encabezadoProductos{
+    text-align: center;
+    font-weight: bold;
+}
+#salirProducto{
+    position: fixed;
+    left: 90%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+#editarProducto{
     position: fixed;
     left: 50%;
     bottom: 20px;
     transform: translate(-50%, -50%);
     margin: 0 auto;
 }
-
-#loginFail{
-    text-align: center; 
-    font-weight: bold;
-    color: red;
+.selector{
+    vertical-align: middle;
 }
+/* FIN ventana producto */
 
-#encabezado{
+/* INICIO Ventana Editar */
+#botonRegresar{
+    position: fixed;
+    left: 90%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+#botonGuardar{
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+#tituloEditar{
     text-align: center;
+    font-weight: bold;
 }
+/* FIN Ventana Editar */
+
+
+
+

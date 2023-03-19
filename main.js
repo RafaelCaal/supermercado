@@ -24,7 +24,7 @@ function createWindow(){
 // VENTANA PRODUCTO INICIO
 function createWindowDos(){
     ventanaProducto = new BrowserWindow ({
-        width: 1000,
+        width: 1400,
         height: 600,
         webPreferences:{
             preload: path.join(app.getAppPath(),'preload.js')
@@ -57,7 +57,7 @@ ipcMain.on('enviaPass',function(event,args){
         console.log('credenciales correctas')
         createWindowDos()
         ventanaProducto.webContents.on('did-finish-load', function(){
-            ventanaProducto.webContents.send('recibeMensaje','LISTA DE PRODUCTOS')
+            ventanaProducto.webContents.send('recibeMensaje','LISTADO DE PRODUCTOS')
         })
        
     } else {
@@ -69,7 +69,7 @@ ipcMain.on('enviaPass',function(event,args){
 // VENTANA PRODUCTO EDITAR
 function createWindowTres(){
     ventanaEditar = new BrowserWindow ({
-        width: 1000,
+        width: 1400,
         height: 400,
         webPreferences:{
             preload: path.join(app.getAppPath(),'preload.js')

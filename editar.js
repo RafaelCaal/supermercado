@@ -5,12 +5,12 @@ window.comunicacion.recibeProveedor(function(event,args){
 
     tablaEditar.innerHTML += "<tr>"+
                                 "<th scope=\"row\">"+args['codigo']+"</th>"+ 
-                                "<td>"+args['nombre']+"</td>"+
-                                "<td>"+args['descripcion']+"</td>"+    
-                                "<td>"+args['precio']+"</td>"+
-                                "<td>"+args['categoria']+"</td>"+
-                                "<td>"+args['proveedor']+"</td>"+
-                                "<td>"+args['existencia']+"</td>"+
+                                "<td><input value=\""+args['nombre']+"\"></input></td>"+
+                                "<td><input value=\""+args['descripcion']+"\"></input></td>"+
+                                "<td><input value=\""+args['precio']+"\"></input></td>"+
+                                "<td><input value=\""+args['categoria']+"\"></input></td>"+
+                                "<td><input value=\""+args['proveedor']+"\"></input></td>"+
+                                "<td><input value=\""+args['existencia']+"\"></input></td>"+
                             "</tr>"
     
 })

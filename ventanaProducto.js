@@ -1,16 +1,16 @@
-var salir = document.getElementById('salir')
+
 var tablaProveedores = document.getElementById('tablaProveedores')
-var encabezado = document.getElementById('encabezado')
-var editar = document.getElementById('editar')
-  
+var encabezado = document.getElementById('encabezadoProductos')
+var editar = document.getElementById('editarProducto')
+var salir = document.getElementById('salirProducto')
 
  window.comunicacion.recibeMensaje(function(event,args){
     encabezado.innerHTML = args
     for (var i=0; i<=productos.length-1; i++){
         var control = productos[i];
         tablaProveedores.innerHTML += "<tr>"+
-                                        "<input type=\"radio\" name=\"fila\" value=\""+i+"\">"+
-                                        "<th scope=\"row\">"+control['codigo']+"</th>"+ 
+                                        "<td><input type=\"radio\" name=\"fila\" value=\""+i+"\"></td>"+
+                                        "<td>"+control['codigo']+"</td>"+ 
                                         "<td>"+control['nombre']+"</td>"+
                                         "<td>"+control['descripcion']+"</td>"+    
                                         "<td>"+control['precio']+"</td>"+
@@ -61,7 +61,7 @@ var productos = [
     },
     {
         "codigo": "10003",
-        "nombre": "Arro Blanco",
+        "nombre": "Arroz Blanco",
         "descripcion": "Gallo Dorado 1 lb",
         "precio": "4.10",
         "categoria": "Alimentos",

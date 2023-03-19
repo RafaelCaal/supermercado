@@ -17,7 +17,7 @@ ingreso.addEventListener('submit',function(recibeIngreso){
         //dialog.showErrorBox("Error de Autenticacion", args);
         document.getElementById('usuarioIngreso').focus();
         let error = document.getElementById('loginFail')
-        error.innerHTML = "CREDENCIALES INVALIDAS"
+        error.innerHTML = args
         if(usuario.focus()){
             usuario.value = ""
             password.value = ""

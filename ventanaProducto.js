@@ -26,25 +26,12 @@ var editar = document.getElementById('editar')
     editar.addEventListener('click', function(event,args){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
         console.log(filaSeleccionada.value)   
-        
-    })
-   
-
-
-    tablaProveedores.addEventListener('click',obtenerIndice)
-    function obtenerIndice(fila){
-        numero = fila.rowIndex;
-        console.log(parseInt(numero))
-    }
-
-
-    
+        window.comunicacion.enviaProveedor(filaSeleccionada.value)
+    })  
     
 })
 
-
-
-
+// Boton salir
 salir.addEventListener("click", function(event, args){
     console.log('estoy regresando')
     window.close();

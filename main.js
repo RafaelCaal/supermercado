@@ -21,6 +21,7 @@ function createWindow(){
     ventana.openDevTools()
 }
 
+// VENTANA PRODUCTO INICIO
 function createWindowDos(){
     ventanaProducto = new BrowserWindow ({
         width: 1000,
@@ -31,8 +32,7 @@ function createWindowDos(){
     });
     ventanaProducto.loadFile('ventanaProducto.html')
 }
-
-
+//Recibe y valida usuario
 ipcMain.on('enviaUsuario',function(event,args){
     console.log(args)
     if(args == usuarioUno){
@@ -42,6 +42,7 @@ ipcMain.on('enviaUsuario',function(event,args){
         usuarioValido = false
     }
 })
+//Recibe y valida password
 ipcMain.on('enviaPass',function(event,args){
     console.log(args)
     if(args == passUno){
@@ -51,7 +52,7 @@ ipcMain.on('enviaPass',function(event,args){
         passValido = false
     }
 
-    //autenticacion de usuario y password
+    //Envia Respuesta de autentication
     if(usuarioValido && passValido){
         console.log('credenciales correctas')
         createWindowDos()
@@ -65,5 +66,26 @@ ipcMain.on('enviaPass',function(event,args){
     }
 })
 
+// VENTANA PRODUCTO EDITAR
+function createWindowTres(){
+    ventanaEditar = new BrowserWindow ({
+        width: 1000,
+        height: 400,
+        webPreferences:{
+            preload: path.join(app.getAppPath(),'preload.js')
+        }
+    });
+    ventanaEditar.loadFile('Editar.html')
+}
+// RECIBE NUMERO DE PROVEEDOR A EDITAR
+ipcMain.on('enviaProveedor', function(event,args){
+    console.log(args)
+
+    // LLAMA VENTANA EDITAR Y PASA EL NUMERO DE FILA
+    createWindowTres()
+    ventanaEditar.webContents.on('did-finish-load', function(){
+        ventanaEditar.webContents.send('recibeProveedor', args)
+    })
+})
 
 app.whenReady().then(createWindow)

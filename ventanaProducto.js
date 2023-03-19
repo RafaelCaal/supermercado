@@ -1,12 +1,15 @@
 var salir = document.getElementById('salir')
 var tablaProveedores = document.getElementById('tablaProveedores')
-var encabezado = document.getElementById('encabezado');
+var encabezado = document.getElementById('encabezado')
+var editar = document.getElementById('editar')
+  
 
  window.comunicacion.recibeMensaje(function(event,args){
     encabezado.innerHTML = args
     for (var i=0; i<=productos.length-1; i++){
         var control = productos[i];
         tablaProveedores.innerHTML += "<tr>"+
+                                        "<input type=\"radio\" name=\"fila\" value=\""+i+"\">"+
                                         "<th scope=\"row\">"+control['codigo']+"</th>"+ 
                                         "<td>"+control['nombre']+"</td>"+
                                         "<td>"+control['descripcion']+"</td>"+    
@@ -19,8 +22,26 @@ var encabezado = document.getElementById('encabezado');
                                       console.log("tamano del arreglo " + productos.length)
     }
 
+    //capturamos el indice del arreglo proveedores
+    editar.addEventListener('click', function(event,args){
+        var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
+        console.log(filaSeleccionada.value)   
+        
+    })
+   
 
+
+    tablaProveedores.addEventListener('click',obtenerIndice)
+    function obtenerIndice(fila){
+        numero = fila.rowIndex;
+        console.log(parseInt(numero))
+    }
+
+
+    
+    
 })
+
 
 
 

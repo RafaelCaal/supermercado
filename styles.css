@@ -18,6 +18,10 @@
     text-align: center;
 }
 
+.selector{
+    vertical-align: middle;
+}
+
 #respuesta{
     text-align: center;
     font-size: large;
@@ -35,6 +39,14 @@
     margin: 30px;
     padding: 20px;
     min-height: 10vh;
+}
+
+#editar{
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
 }
 
 #loginFail{

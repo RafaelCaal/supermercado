@@ -26,7 +26,7 @@ var editar = document.getElementById('editar')
     editar.addEventListener('click', function(event,args){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
         console.log(filaSeleccionada.value)   
-        window.comunicacion.enviaProveedor(filaSeleccionada.value)
+        window.comunicacion.enviaProveedor(productos[filaSeleccionada.value])
     })  
     
 })

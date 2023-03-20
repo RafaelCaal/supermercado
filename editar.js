@@ -8,12 +8,12 @@ window.comunicacion.recibeProveedor(function(event,args){
 
     tablaEditar.innerHTML += "<tr>"+
                                 "<th scope=\"row\">"+args['codigo']+"</th>"+ 
-                                "<td><input value=\""+args['nombre']+"\"></input></td>"+
-                                "<td><input value=\""+args['descripcion']+"\"></input></td>"+
-                                "<td><input value=\""+args['precio']+"\"></input></td>"+
-                                "<td><input value=\""+args['categoria']+"\"></input></td>"+
-                                "<td><input value=\""+args['proveedor']+"\"></input></td>"+
-                                "<td><input value=\""+args['existencia']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['nombre']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['descripcion']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['precio']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['categoria']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['proveedor']+"\"></input></td>"+
+                                "<td><input type=\"text\" value=\""+args['existencia']+"\"></input></td>"+
                             "</tr>"
 
     botonGuardar.addEventListener('click', function(){
@@ -22,4 +22,10 @@ window.comunicacion.recibeProveedor(function(event,args){
     })    
 })
 
+
+// Boton regresar
+botonRegresar.addEventListener("click", function(event, args){
+    console.log('estoy regresando')
+    window.close();
+})
 

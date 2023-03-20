@@ -1,3 +1,5 @@
+var botonPedReg = document.getElementById('botonPedReg')
+
 window.comunicacion.recibeProveedor(function(event,args){
     console.log(args)
 
@@ -8,4 +10,11 @@ window.comunicacion.recibeProveedor(function(event,args){
                                 "<td><input type=\"text\"></input></td>"+
                             "</tr>"
 
+})
+
+
+// Boton regresar
+botonPedReg.addEventListener("click", function(event, args){
+    console.log('estoy regresando')
+    window.close();
 })

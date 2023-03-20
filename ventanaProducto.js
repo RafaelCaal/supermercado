@@ -2,6 +2,7 @@
 var tablaProveedores = document.getElementById('tablaProveedores')
 var encabezado = document.getElementById('encabezadoProductos')
 var editar = document.getElementById('editarProducto')
+var pedido = document.getElementById('realizarPedido')
 var salir = document.getElementById('salirProducto')
 
  window.comunicacion.recibeMensaje(function(event,args){
@@ -22,14 +23,23 @@ var salir = document.getElementById('salirProducto')
                                       console.log("tamano del arreglo " + productos.length)
     }
 
-    //capturamos el indice del arreglo proveedores
+    //capturamos el indice del arreglo proveedores y llamamos ventana para editar producto
     editar.addEventListener('click', function(event,args){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
         console.log(filaSeleccionada.value)   
-        window.comunicacion.enviaProveedor(productos[filaSeleccionada.value])
+        window.comunicacion.enviaProveedor([productos[filaSeleccionada.value], 'editar'])
     })  
+
+    //capturamos el indice del arreglo proveedores y llamamos ventana para realizar pedido
+    pedido.addEventListener('click', function(){
+        var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
+            console.log(filaSeleccionada.value)   
+            window.comunicacion.enviaProveedor([productos[filaSeleccionada.value], 'pedido'])
+    })
     
 })
+
+
 
 // Boton salir
 salir.addEventListener("click", function(event, args){

@@ -47,6 +47,13 @@
     transform: translate(-50%, -50%);
     margin: 0 auto;
 }
+#realizarPedido{
+    position: fixed;
+    left: 60%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto; 
+}
 .selector{
     vertical-align: middle;
 }
@@ -67,12 +74,34 @@
     transform: translate(-50%, -50%);
     margin: 0 auto;
 }
+#botonDeshacer{
+    position: fixed;
+    left: 65%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
 #tituloEditar{
     text-align: center;
     font-weight: bold;
 }
 /* FIN Ventana Editar */
 
-
+/* INICIO ventana pedido */
+#botonOrdenar{
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+#botonPedReg{
+    position: fixed;
+    left: 80%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+/* INICIO ventana pedido */
 
 

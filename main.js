@@ -4,6 +4,7 @@ const path = require('path')
 
 let ventana;
 let ventanaProducto;
+let ventanaPedido;
 usuarioValido = false
 passValido = false
 usuarioUno = "super"
@@ -21,7 +22,7 @@ function createWindow(){
     //ventana.openDevTools()
 }
 
-// VENTANA PRODUCTO INICIO
+// INICIO ventana lista productos
 function createWindowDos(){
     ventanaProducto = new BrowserWindow ({
         width: 1400,
@@ -65,8 +66,9 @@ ipcMain.on('enviaPass',function(event,args){
         ventana.webContents.send('recibeMensaje','Credenciales Incorrectas')
     }
 })
+// FIN ventana lista productos
 
-// VENTANA PRODUCTO EDITAR
+// INICIO ventana editar
 function createWindowTres(){
     ventanaEditar = new BrowserWindow ({
         width: 1400,
@@ -77,15 +79,40 @@ function createWindowTres(){
     });
     ventanaEditar.loadFile('Editar.html')
 }
-// RECIBE NUMERO DE PROVEEDOR A EDITAR
+// recibe numero de indice del arreglo a editar
 ipcMain.on('enviaProveedor', function(event,args){
-    console.log(args)
+    console.log(args[1])
 
-    // LLAMA VENTANA EDITAR Y PASA EL NUMERO DE FILA
-    createWindowTres()
-    ventanaEditar.webContents.on('did-finish-load', function(){
-        ventanaEditar.webContents.send('recibeProveedor', args)
-    })
+    if(args[1] == "editar"){
+        console.log('solitan ventana editar')
+        createWindowTres()
+        ventanaEditar.webContents.on('did-finish-load', function(){
+            ventanaEditar.webContents.send('recibeProveedor', args[0])
+        })
+    }
+    if(args[1] == "pedido"){
+        console.log('solitan ventana pedido')
+        createWindowCuatro()
+        ventanaPedido.webContents.on('did-finish-load', function(){
+            ventanaPedido.webContents.send('recibeProveedor', args[0])
+        })
+    }
+    // llama a ventana editar y pasa el numero de fila( indice del arreglo)
+    
 })
+// FIN ventana editar
+
+// INICIO ventana realizar pedido
+function createWindowCuatro(){
+    ventanaPedido = new BrowserWindow ({
+        width: 800,
+        height: 350,
+        webPreferences:{
+            preload: path.join(app.getAppPath(),'preload.js')
+        }
+    });
+    ventanaPedido.loadFile('ventanaPedido.html')
+}
+// FIN ventana realizar pedido
 
 app.whenReady().then(createWindow)

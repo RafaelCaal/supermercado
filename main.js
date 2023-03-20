@@ -26,7 +26,7 @@ function createWindow(){
 function createWindowDos(){
     ventanaProducto = new BrowserWindow ({
         width: 1400,
-        height: 600,
+        height: 700,
         webPreferences:{
             preload: path.join(app.getAppPath(),'preload.js')
         }

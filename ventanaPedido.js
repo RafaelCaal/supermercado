@@ -7,7 +7,7 @@ window.comunicacion.recibeProveedor(function(event,args){
                                 "<td scope=\"row\">"+args['codigo']+"</td>"+ 
                                 "<td scope=\"row\">"+args['nombre']+"</td>"+ 
                                 "<td scope=\"row\">"+args['proveedor']+"</td>"+ 
-                                "<td><input type=\"text\"></input></td>"+
+                                "<td><input type=\"text\" id=\"cantidadPedido\"></input></td>"+
                             "</tr>"
 
 })

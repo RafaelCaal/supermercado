@@ -1,7 +1,9 @@
 var tablaEditar = document.getElementById('tablaEditar')
 var botonGuardar = document.getElementById('botonGuardar')
+var botonDeshacer = document.getElementById('botonDeshacer')
 var botonRegresar = document.getElementById('botonRegresar')
 var mensajeCambios = document.getElementById('mensajeCambios')
+
 
 window.comunicacion.recibeProveedor(function(event,args){
     console.log(args)
@@ -27,20 +29,20 @@ window.comunicacion.recibeProveedor(function(event,args){
 
 
      /*
-     Al presionar guardar el valor de los campos de texto sera
-     almacenado para ser comparado con los valores originales
+     Los campos de texto seran antes de presionar guardar para
+     poder ser utilizados por ambos botones guardar y deshacer.
+     Serviran paraa comparar con los valores originales,
      si son diferenes significa que han habido cambios y se
-     substituiran los valores originales por los nuevos
+     substituiran los valores originales por los nuevos.
      */
+     var tempNombre = document.getElementById('tempNom')
+     var tempDescripcion = document.getElementById('tempDes')
+     var tempPrecio = document.getElementById('tempPre')
+     var tempCategoria = document.getElementById('tempCat')
+     var tempProveedor = document.getElementById('tempPro')
+     var tempExistencia = document.getElementById('tempExi')
+     var cambio = false;
     botonGuardar.addEventListener('click', function(){
-        var tempNombre = document.getElementById('tempNom')
-        var tempDescripcion = document.getElementById('tempDes')
-        var tempPrecio = document.getElementById('tempPre')
-        var tempCategoria = document.getElementById('tempCat')
-        var tempProveedor = document.getElementById('tempPro')
-        var tempExistencia = document.getElementById('tempExi')
-        var cambio = false;
-
         //console.log(originNombre)
         //console.log(tempNombre.value)
         if(originNombre == tempNombre.value &&
@@ -61,9 +63,39 @@ window.comunicacion.recibeProveedor(function(event,args){
                 mensajeCambios.innerHTML  = "  "
             }, "2000");
         }
-        console.log(cambio)
-       
-    })    
+    })   
+    
+    /*
+    restablecemos los valores originales de todos los campos de texto
+    */
+    botonDeshacer.addEventListener('click', function(){
+        if(originNombre == tempNombre.value &&
+            originDescripcion == tempDescripcion.value &&
+            originPrecio == tempPrecio.value &&
+            originCategoria == tempCategoria.value &&
+            originProveedor == tempProveedor.value &&
+            originExistencia == tempExistencia.value){
+            cambio = false;
+            mensajeCambios.innerHTML = "No Hay Cambios"
+            setTimeout(() => {
+                mensajeCambios.innerHTML  = "  "
+            }, "2000");
+        } else {
+            tempNombre.value = originNombre
+            tempDescripcion.value = originDescripcion
+            tempPrecio.value = originPrecio
+            tempCategoria.value = originCategoria
+            tempProveedor.value = originProveedor
+            tempExistencia.value = originExistencia  
+            mensajeCambios.innerHTML = "Valores Originales Restablecidos"
+            setTimeout(() => {
+                mensajeCambios.innerHTML  = "  "
+            }, "2000");
+            }
+        })
+
+
+
 })
 
 

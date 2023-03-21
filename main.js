@@ -79,10 +79,15 @@ function createWindowTres(){
     });
     ventanaEditar.loadFile('Editar.html')
 }
-// recibe numero de indice del arreglo a editar
+/*
+recibe el valor del indice del arreglo contenido en e JSON 
+args[0] tambien recibe el nombre de la ventana args[1] 
+que se solicita y ambos estan contenidos dentro de args
+*/
 ipcMain.on('enviaProveedor', function(event,args){
     console.log(args[1])
 
+    //el usuario presiona el boton editar => abrimos ventana ediar
     if(args[1] == "editar"){
         console.log('solitan ventana editar')
         createWindowTres()
@@ -90,6 +95,7 @@ ipcMain.on('enviaProveedor', function(event,args){
             ventanaEditar.webContents.send('recibeProveedor', args[0])
         })
     }
+    //el usuario presiona el boton pedido => abrimos ventana pedido
     if(args[1] == "pedido"){
         console.log('solitan ventana pedido')
         createWindowCuatro()

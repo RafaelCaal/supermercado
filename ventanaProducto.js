@@ -6,35 +6,35 @@ var pedido = document.getElementById('realizarPedido')
 var salir = document.getElementById('salirProducto')
 
  window.comunicacion.recibeMensaje(function(event,args){
-    encabezado.innerHTML = args
-    for (var i=0; i<=productos.length-1; i++){
-        var control = productos[i];
+    //encabezado.innerHTML = args
+    for (var i=0; i<args.length; i++){
+        var control = args[i];
         tablaProveedores.innerHTML += "<tr>"+
-                                        "<td><input type=\"radio\" name=\"fila\" value=\""+i+"\"></td>"+
-                                        "<td>"+control['codigo']+"</td>"+ 
-                                        "<td>"+control['nombre']+"</td>"+
-                                        "<td>"+control['descripcion']+"</td>"+    
-                                        "<td>"+control['precio']+"</td>"+
+                                        "<td><input type=\"radio\" name=\"fila\" value=\""+control['idproducto']+"\"></td>"+
+                                        "<td>"+control['idproducto']+"</td>"+ 
+                                        "<td>"+control['nombreproducto']+"</td>"+
+                                        "<td>"+control['descripcionproducto']+"</td>"+    
+                                        "<td>"+control['precioproducto']+"</td>"+
                                         "<td>"+control['categoria']+"</td>"+
-                                        "<td>"+control['proveedor']+"</td>"+
+                                        "<td>"+control['idproveedor']+"</td>"+
                                         "<td>"+control['existencia']+"</td>"+
                                       "</tr>"
                                       console.log(i)
-                                      console.log("tamano del arreglo " + productos.length)
+                                      console.log("tamano del arreglo " + args.length)
     }
 
     //capturamos el indice del arreglo proveedores y llamamos ventana para editar producto
-    editar.addEventListener('click', function(event,args){
+    editar.addEventListener('click', function(){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
         console.log(filaSeleccionada.value)   
-        window.comunicacion.enviaProveedor([productos[filaSeleccionada.value], 'editar'])
+        window.comunicacion.enviaProveedor([args[filaSeleccionada.value-1], 'editar'])
     })  
 
     //capturamos el indice del arreglo proveedores y llamamos ventana para realizar pedido
     pedido.addEventListener('click', function(){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
             console.log(filaSeleccionada.value)   
-            window.comunicacion.enviaProveedor([productos[filaSeleccionada.value], 'pedido'])
+            window.comunicacion.enviaProveedor([args[filaSeleccionada.value-1], 'pedido'])
     })
     
 })
@@ -48,7 +48,7 @@ salir.addEventListener("click", function(event, args){
 })
 
 
-
+/*
 //datos de prueba en formato JSON
 var productos = [
     {
@@ -142,3 +142,4 @@ var productos = [
         "existencia": 80
     },
 ]
+*/

@@ -4,9 +4,9 @@ window.comunicacion.recibeProveedor(function(event,args){
     console.log(args)
 
     tablaEditar.innerHTML += "<tr>"+
-                                "<td scope=\"row\">"+args['codigo']+"</td>"+ 
-                                "<td scope=\"row\">"+args['nombre']+"</td>"+ 
-                                "<td scope=\"row\">"+args['proveedor']+"</td>"+ 
+                                "<td scope=\"row\">"+args['idproducto']+"</td>"+ 
+                                "<td scope=\"row\">"+args['nombreproducto']+"</td>"+ 
+                                "<td scope=\"row\">"+args['idproveedor']+"</td>"+ 
                                 "<td><input type=\"text\" id=\"cantidadPedido\"></input></td>"+
                             "</tr>"
 

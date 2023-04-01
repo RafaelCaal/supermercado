@@ -6,24 +6,24 @@ var mensajeCambios = document.getElementById('mensajeCambios')
 
 
 window.comunicacion.recibeProveedor(function(event,args){
-    console.log(args)
+    console.log(args.value)
 
     //guardamos los valores originales del JSON
-    var originNombre = args['nombre']
-    var originDescripcion = args['descripcion']
-    var originPrecio = args['precio']
+    var originNombre = args['nombreproducto']
+    var originDescripcion = args['descripcionproducto']
+    var originPrecio = args['precioproducto']
     var originCategoria = args['categoria']
-    var originProveedor = args['proveedor']
+    var originProveedor = args['idproveedor']
     var originExistencia = args['existencia']
 
     //enviamos los valores del JSON a los campos de texto
     tablaEditar.innerHTML += "<tr>"+
-                                "<th scope=\"row\">"+args['codigo']+"</th>"+ 
-                                "<td><input type=\"text\" id=\"tempNom\" value=\""+args['nombre']+"\"></input></td>"+
-                                "<td><input type=\"text\" id=\"tempDes\" value=\""+args['descripcion']+"\"></input></td>"+
-                                "<td><input type=\"text\" id=\"tempPre\" value=\""+args['precio']+"\"></input></td>"+
+                                "<th scope=\"row\">"+args['idproducto']+"</th>"+ 
+                                "<td><input type=\"text\" id=\"tempNom\" value=\""+args['nombreproducto']+"\"></input></td>"+
+                                "<td><input type=\"text\" id=\"tempDes\" value=\""+args['descripcionproducto']+"\"></input></td>"+
+                                "<td><input type=\"text\" id=\"tempPre\" value=\""+args['precioproducto']+"\"></input></td>"+
                                 "<td><input type=\"text\" id=\"tempCat\" value=\""+args['categoria']+"\"></input></td>"+
-                                "<td><input type=\"text\" id=\"tempPro\" value=\""+args['proveedor']+"\"></input></td>"+
+                                "<td><input type=\"text\" id=\"tempPro\" value=\""+args['idproveedor']+"\"></input></td>"+
                                 "<td><input type=\"text\" id=\"tempExi\" value=\""+args['existencia']+"\"></input></td>"+
                             "</tr>"
 
@@ -33,7 +33,7 @@ window.comunicacion.recibeProveedor(function(event,args){
      poder ser utilizados por ambos botones guardar y deshacer.
      Serviran paraa comparar con los valores originales,
      si son diferenes significa que han habido cambios y se
-     substituiran los valores originales por los nuevos.
+     substituiran los valores originales por los nuevos
      */
      var tempNombre = document.getElementById('tempNom')
      var tempDescripcion = document.getElementById('tempDes')

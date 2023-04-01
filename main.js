@@ -1,14 +1,31 @@
+/**
+ * El usuario de ingreso es: tds (minusculas)
+ * El password de ingreso es: abc (minusculas)
+ */
+
 const {app, dialog, BrowserWindow, ipcMain} = require('electron')
 
 const path = require('path')
+const mysql = require('mysql2')
+
+const bcrypt = require('bcrypt')
+const saltrounds = 10;
 
 let ventana;
 let ventanaProducto;
 let ventanaPedido;
 usuarioValido = false
 passValido = false
-usuarioUno = "super"
+usuarioUno = "tds"
 passUno = "abc" 
+
+//creamos la conexion a la base de datos
+const conexion = mysql.createConnection({
+    host: 'localhost',
+    user: 'conexion_pruebas',
+    password: 'password',
+    database: 'supermercadouno'
+})
 
 function createWindow(){
     ventana = new BrowserWindow ({
@@ -33,26 +50,69 @@ function createWindowDos(){
     });
     ventanaProducto.loadFile('ventanaProducto.html')
 }
+
 //Recibe y valida usuario
-ipcMain.on('enviaUsuario',function(event,args){
+ipcMain.on('enviaCredenciales',function(event,args){
     console.log(args)
+    conexion.promise().execute('SELECT * FROM usuario WHERE nomusuario=?' , [args[0]])
+    .then(([results, fields])=>{
+        if(results.length > 0){
+            console.log('bienvenido')
+            console.log(results)
+            bcrypt.compare(args[1], results[0][2], function(err, result) {
+                createWindowDos()
+                ventanaProducto.webContents.on('did-finish-load', function(){
+
+                    conexion.query('SELECT * FROM productos',
+                        function(err, result, fields){
+                            if(err){
+                                console.log(err)
+                            }
+                            console.log(result)
+                            //console.log(fields)
+                            ventanaProducto.webContents.send('recibeMensaje',result)
+                            ventana.close();
+                        }
+                    )
+
+                  
+                })
+            })
+        }else{
+            console.log('credenciales incorrectas')
+            ventana.webContents.send('recibeMensaje','Credenciales Incorrectas')
+        }
+    })
+})           
+        
+    /*
     if(args == usuarioUno){
         usuarioValido = true
         console.log(usuarioValido)
     } else {
         usuarioValido = false
     }
-})
+    */  
+
+
+/*
 //Recibe y valida password
 ipcMain.on('enviaPass',function(event,args){
     console.log(args)
+    conexion.promise().execute('SELECT * FROM usuario WHERE passusuario=?', args)
+        .then(([results, fields])=>{
+            if(results.length > 0){
+                console.log('bienvenido')
+            }else{
+                console.log('usuario invalido')
+            }
+        })    
     if(args == passUno){
         passValido = true
         console.log(passValido)
     } else {
         passValido = false
-    }
-
+    }  
     //Envia Respuesta de autentication
     if(usuarioValido && passValido){
         console.log('credenciales correctas')
@@ -65,7 +125,8 @@ ipcMain.on('enviaPass',function(event,args){
         console.log('credenciales incorrectas')
         ventana.webContents.send('recibeMensaje','Credenciales Incorrectas')
     }
-})
+    */
+
 // FIN ventana lista productos
 
 // INICIO ventana editar
@@ -89,7 +150,7 @@ ipcMain.on('enviaProveedor', function(event,args){
 
     //el usuario presiona el boton editar => abrimos ventana ediar
     if(args[1] == "editar"){
-        console.log('solitan ventana editar')
+        console.log('solicitan ventana editar')
         createWindowTres()
         ventanaEditar.webContents.on('did-finish-load', function(){
             ventanaEditar.webContents.send('recibeProveedor', args[0])
@@ -122,3 +183,19 @@ function createWindowCuatro(){
 // FIN ventana realizar pedido
 
 app.whenReady().then(createWindow)
+
+
+
+conexion.query(
+    'SELECT * FROM usuario',
+    function(err, result, fields){
+        if(err){
+            console.log(err)
+        }
+        console.log(result)
+        //console.log(fields)
+    }
+)
+
+
+

@@ -7,7 +7,7 @@ contextBridge.exposeInMainWorld(
         //enviaPass: (pass) => ipcRenderer.send('enviaPass', pass),
         recibeMensaje: (mensaje) => ipcRenderer.on('recibeMensaje', mensaje),
         enviaProveedor: (enviaProv) => ipcRenderer.send('enviaProveedor', enviaProv),
-        recibeProveedor: (reciProv) => ipcRenderer.on('recibeProveedor', reciProv)
-
+        recibeProveedor: (reciProv) => ipcRenderer.on('recibeProveedor', reciProv),
+        vent_edit_envia:(cambios) => ipcRenderer.send('vent_edit_envia', cambios)
     }
 )

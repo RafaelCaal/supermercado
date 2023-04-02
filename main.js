@@ -62,20 +62,29 @@ ipcMain.on('enviaCredenciales',function(event,args){
             bcrypt.compare(args[1], results[0][2], function(err, result) {
                 createWindowDos()
                 ventanaProducto.webContents.on('did-finish-load', function(){
-
+                    var pruebaX = 'hola'
+                    //cargamos los datos de la tabla productos
                     conexion.query('SELECT * FROM productos',
-                        function(err, result, fields){
+                        function(err, resultProd, fields){
                             if(err){
                                 console.log(err)
-                            }
-                            console.log(result)
-                            //console.log(fields)
-                            ventanaProducto.webContents.send('recibeMensaje',result)
-                            ventana.close();
-                        }
-                    )
+                            }else{
+                                console.log(result)
+                                //console.log(fields)
 
-                  
+                                //query para obtener el listado de proveedor y su ID
+                                conexion.query(
+                                    'SELECT  p.idproveedor, p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor;',
+                                    function(err, resultProv, fields){
+                                        if(err){
+                                            console.log(err)
+                                        }else{
+                                            ventanaProducto.webContents.send('recibeMensaje',[resultProd, resultProv])
+                                            ventana.close();
+                                        }
+                                    })
+                            }
+                        })                  
                 })
             })
         }else{
@@ -85,48 +94,7 @@ ipcMain.on('enviaCredenciales',function(event,args){
     })
 })           
         
-    /*
-    if(args == usuarioUno){
-        usuarioValido = true
-        console.log(usuarioValido)
-    } else {
-        usuarioValido = false
-    }
-    */  
-
-
-/*
-//Recibe y valida password
-ipcMain.on('enviaPass',function(event,args){
-    console.log(args)
-    conexion.promise().execute('SELECT * FROM usuario WHERE passusuario=?', args)
-        .then(([results, fields])=>{
-            if(results.length > 0){
-                console.log('bienvenido')
-            }else{
-                console.log('usuario invalido')
-            }
-        })    
-    if(args == passUno){
-        passValido = true
-        console.log(passValido)
-    } else {
-        passValido = false
-    }  
-    //Envia Respuesta de autentication
-    if(usuarioValido && passValido){
-        console.log('credenciales correctas')
-        createWindowDos()
-        ventanaProducto.webContents.on('did-finish-load', function(){
-            ventanaProducto.webContents.send('recibeMensaje','LISTADO DE PRODUCTOS')
-        })
-       
-    } else {
-        console.log('credenciales incorrectas')
-        ventana.webContents.send('recibeMensaje','Credenciales Incorrectas')
-    }
-    */
-
+ 
 // FIN ventana lista productos
 
 // INICIO ventana editar
@@ -149,23 +117,28 @@ ipcMain.on('enviaProveedor', function(event,args){
     console.log(args[1])
 
     //el usuario presiona el boton editar => abrimos ventana ediar
-    if(args[1] == "editar"){
+    //recibe arreglo[arregloProductos, arregloProveedor, editar/ordenar] 
+    if(args[2] == "editar"){
         console.log('solicitan ventana editar')
         createWindowTres()
         ventanaEditar.webContents.on('did-finish-load', function(){
-            ventanaEditar.webContents.send('recibeProveedor', args[0])
+            ventanaEditar.webContents.send('recibeProveedor', args)
         })
     }
     //el usuario presiona el boton pedido => abrimos ventana pedido
-    if(args[1] == "pedido"){
+    if(args[2] == "pedido"){
         console.log('solitan ventana pedido')
         createWindowCuatro()
         ventanaPedido.webContents.on('did-finish-load', function(){
-            ventanaPedido.webContents.send('recibeProveedor', args[0])
+            ventanaPedido.webContents.send('recibeProveedor', args)
         })
-    }
-    // llama a ventana editar y pasa el numero de fila( indice del arreglo)
-    
+    }    
+})
+
+//se reciben los cambios de la ventana editar y se actualiza tabla
+ipcMain.on('vent_edit_envia', function(event, args){
+    console.log(args)
+
 })
 // FIN ventana editar
 
@@ -186,6 +159,21 @@ app.whenReady().then(createWindow)
 
 
 
+//PRUEBAS
+
+//Prueba: query para obtener el listado de proveedor y su 
+conexion.query(
+    'SELECT  p.idproveedor, p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor;',
+    function(err, result, fields){
+        if(err){
+            console.log(err)
+        }
+        console.log(result)
+        //console.log(fields)
+    }
+)
+
+//primer query de prueba
 conexion.query(
     'SELECT * FROM usuario',
     function(err, result, fields){
@@ -196,6 +184,7 @@ conexion.query(
         //console.log(fields)
     }
 )
+
 
 
 

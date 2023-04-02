@@ -7,34 +7,37 @@ var salir = document.getElementById('salirProducto')
 
  window.comunicacion.recibeMensaje(function(event,args){
     //encabezado.innerHTML = args
-    for (var i=0; i<args.length; i++){
-        var control = args[i];
+    console.log(args[0])
+    console.log(args[1])
+    for (var i=0; i<args[0].length; i++){
+        var controlProd = args[0][i];
+        var controlProv = args[1][i];
         tablaProveedores.innerHTML += "<tr>"+
-                                        "<td><input type=\"radio\" name=\"fila\" value=\""+control['idproducto']+"\"></td>"+
-                                        "<td>"+control['idproducto']+"</td>"+ 
-                                        "<td>"+control['nombreproducto']+"</td>"+
-                                        "<td>"+control['descripcionproducto']+"</td>"+    
-                                        "<td>"+control['precioproducto']+"</td>"+
-                                        "<td>"+control['categoria']+"</td>"+
-                                        "<td>"+control['idproveedor']+"</td>"+
-                                        "<td>"+control['existencia']+"</td>"+
+                                        "<td><input type=\"radio\" name=\"fila\" value=\""+controlProd['idproducto']+"\"></td>"+
+                                        "<td>"+controlProd['idproducto']+"</td>"+ 
+                                        "<td>"+controlProd['nombreproducto']+"</td>"+
+                                        "<td>"+controlProd['descripcionproducto']+"</td>"+    
+                                        "<td>"+controlProd['precioproducto']+"</td>"+
+                                        "<td>"+controlProd['categoria']+"</td>"+
+                                        "<td>"+controlProv['nombreproveedor']+"</td>"+
+                                        "<td>"+controlProd['existencia']+"</td>"+
                                       "</tr>"
                                       console.log(i)
-                                      console.log("tamano del arreglo " + args.length)
+                                      console.log("tamano del arreglo en indice 0 es: " + args[0].length)
     }
 
     //capturamos el indice del arreglo proveedores y llamamos ventana para editar producto
     editar.addEventListener('click', function(){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
         console.log(filaSeleccionada.value)   
-        window.comunicacion.enviaProveedor([args[filaSeleccionada.value-1], 'editar'])
+        window.comunicacion.enviaProveedor([args[0][filaSeleccionada.value-1], args[1][filaSeleccionada.value-1], 'editar'])
     })  
 
     //capturamos el indice del arreglo proveedores y llamamos ventana para realizar pedido
     pedido.addEventListener('click', function(){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
             console.log(filaSeleccionada.value)   
-            window.comunicacion.enviaProveedor([args[filaSeleccionada.value-1], 'pedido'])
+            window.comunicacion.enviaProveedor([args[0][filaSeleccionada.value-1], 'pedido'])
     })
     
 })

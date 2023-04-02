@@ -158,7 +158,6 @@ function createWindowCuatro(){
 app.whenReady().then(createWindow)
 
 
-
 //PRUEBAS
 
 //Prueba: query para obtener el listado de proveedor y su 

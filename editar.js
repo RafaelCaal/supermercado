@@ -18,7 +18,6 @@ window.comunicacion.recibeProveedor(function(event,args){
         "nombreproveedor" : " ",
         "existencia" : " "
     }
-    console.log(estado.idproducto)
 
     //enviamos los valores del JSON a los campos de texto
     tablaEditar.innerHTML += "<tr>"+
@@ -50,6 +49,12 @@ window.comunicacion.recibeProveedor(function(event,args){
     
 
     botonGuardar.addEventListener('click', function(){
+        /**
+         * al hacer click en boton guardar capturamos los valores de los
+         * campos de texto en JSON estado y luego verificamos. Si hay cambios 
+         * guardamos el JSON dentro del arreglo guardaEstado, si no hay cambios
+         * eliminamos el JSON estado para mantener solamente los estados con cambios.
+         */
         estado = {
             "idproducto" : args[0].idproducto,
             "nombreproducto" : document.getElementById('tempNom').value,
@@ -60,8 +65,10 @@ window.comunicacion.recibeProveedor(function(event,args){
             "nombreproveedor" : document.getElementById('tempPro').value,
             "existencia" : document.getElementById('tempExi').value
         }
+        //agregamos el JSON al ultimo indice de nuestro arreglo guardaEstado
         guardaEstado.push(estado)
         console.log(guardaEstado)
+        //Detectamos cambios y los enviamos al servidor 
         if(guardaEstado[guardaEstado.length-2].nombreproducto == guardaEstado[guardaEstado.length-1].nombreproducto &&
            guardaEstado[guardaEstado.length-2].descripcionproducto == guardaEstado[guardaEstado.length-1].descripcionproducto &&
            guardaEstado[guardaEstado.length-2].precioproducto == guardaEstado[guardaEstado.length-1].precioproducto &&
@@ -79,8 +86,6 @@ window.comunicacion.recibeProveedor(function(event,args){
         }else{
             console.log('hay cambios')
             console.log(guardaEstado[guardaEstado.length-1])
-            //var x = guardaEstado.length-1
-            //console.log(x)
             //enviamos el ultimo indice del arreglo que es el que ha guardado los cambios
             window.comunicacion.vent_edit_envia([guardaEstado[guardaEstado.length-1]])
             //informamoos al usuario que se guardaron los cambios
@@ -96,39 +101,38 @@ window.comunicacion.recibeProveedor(function(event,args){
     restablecemos los valores originales de todos los campos de texto
     */
     botonDeshacer.addEventListener('click', function(){
-        if(originNombre == tempNombre.value &&
-            originDescripcion == tempDescripcion.value &&
-            originPrecio == tempPrecio.value &&
-            originCategoria == tempCategoria.value &&
-            originProveedor == tempProveedor.value &&
-            originExistencia == tempExistencia.value){
-            cambio = false;
-            mensajeCambios.innerHTML = "No Hay Cambios"
+        //Detectamos cambios a traves del tamano del arreglo guardaEstado  
+        if(guardaEstado.length>1){
+            //restablecemos los valores usando el PENULTIMO indice
+            tempNom.value = guardaEstado[guardaEstado.length-2].nombreproducto;
+            console.log(tempNom.value)
+            tempDes.value = guardaEstado[guardaEstado.length-2].descripcionproducto;
+            tempPre.value = guardaEstado[guardaEstado.length-2].precioproducto;
+            tempCat.value = guardaEstado[guardaEstado.length-2].categoria;
+            tempIdPro.value = args[1].idproveedor;
+            tempPro.value = guardaEstado[guardaEstado.length-2].nombreproveedor;
+            tempExi.value = guardaEstado[guardaEstado.length-2].existencia;
+            //eliminamos el ULITMO indice del arreglo guardEstado que deshicimos
+            guardaEstado.pop();
+            //enviamos el ultimo indice del estado guardaEstado
+            window.comunicacion.vent_edit_envia([guardaEstado[guardaEstado.length-1]])
+            //avisamos al usuario que se han guardado los cambios
+            mensajeCambios.innerHTML = "Deshacer y autoguardar exitoso"
             setTimeout(() => {
                 mensajeCambios.innerHTML  = "  "
             }, "2000");
-        } else {
-            tempNombre.value = originNombre
-            tempDescripcion.value = originDescripcion
-            tempPrecio.value = originPrecio
-            tempCategoria.value = originCategoria
-            tempProveedor.value = originProveedor
-            tempExistencia.value = originExistencia  
-            mensajeCambios.innerHTML = "Valores Originales Restablecidos"
+        }else{
+            console.log('no hay cambios')
+            mensajeCambios.innerHTML = "No hay cambios"
             setTimeout(() => {
                 mensajeCambios.innerHTML  = "  "
             }, "2000");
-            }
-        })
-
-
-
+        }
+    })
 })
-
 
 // Boton regresar
 botonRegresar.addEventListener("click", function(event, args){
     console.log('estoy regresando')
     window.close();
 })
-

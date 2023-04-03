@@ -37,7 +37,7 @@ var salir = document.getElementById('salirProducto')
     pedido.addEventListener('click', function(){
         var filaSeleccionada = document.querySelector('input[name="fila"]:checked'); 
             console.log(filaSeleccionada.value)   
-            window.comunicacion.enviaProveedor([args[0][filaSeleccionada.value-1], 'pedido'])
+            window.comunicacion.enviaProveedor([args[0][filaSeleccionada.value-1], args[1][filaSeleccionada.value-1], 'pedido'])
     })
     
 })

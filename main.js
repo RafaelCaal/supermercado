@@ -114,9 +114,9 @@ args[0] tambien recibe el nombre de la ventana args[1]
 que se solicita y ambos estan contenidos dentro de args
 */
 ipcMain.on('enviaProveedor', function(event,args){
+    console.log(args)
     console.log(args[0])
     console.log(args[1])
-
     //el usuario presiona el boton editar => abrimos ventana ediar
     //recibe arreglo[arregloProductos, arregloProveedor, editar/ordenar] 
     if(args[2] == "editar"){
@@ -159,8 +159,6 @@ ipcMain.on('vent_edit_envia', function(event, args){
     }) 
     //fin refrescar
     
-
-
 })
 // FIN ventana editar
 
@@ -175,6 +173,11 @@ function createWindowCuatro(){
     });
     ventanaPedido.loadFile('ventanaPedido.html')
 }
+// recibe el pedido desde la interface
+ipcMain.on('realiza_pedido',function(event,args){
+    console.log(args)
+})
+
 // FIN ventana realizar pedido
 
 app.whenReady().then(createWindow)

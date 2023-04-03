@@ -49,6 +49,19 @@ CREATE TABLE pedido(
     FOREIGN KEY(idproveedor) REFERENCES proveedor(idproveedor)
 );
 
+DROP TABLE IF EXISTS orden;
+CREATE TABLE orden(
+	idorden INT NOT NULL AUTO_INCREMENT,
+	idproducto INT NOT NULL,
+    nombreProducto VARCHAR(255),
+    idProveedor INT NOT NULL,
+	nombreProveedor VARCHAR(255),
+    cantidad INT NOT NULL,
+    PRIMARY KEY (idorden)
+);
+
+
+
 -- TABLA pruebas
 DROP TABLE IF EXISTS pruebas;
 CREATE TABLE pruebas(

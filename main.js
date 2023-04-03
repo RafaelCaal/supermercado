@@ -69,7 +69,7 @@ ipcMain.on('enviaCredenciales',function(event,args){
                             if(err){
                                 console.log(err)
                             }else{
-                                console.log(result)
+                                console.log(resultProd)
                                 //console.log(fields)
 
                                 //query para obtener el listado de proveedor y su ID
@@ -84,7 +84,7 @@ ipcMain.on('enviaCredenciales',function(event,args){
                                         }
                                     })
                             }
-                        })                  
+                    })                  
                 })
             })
         }else{
@@ -148,7 +148,19 @@ ipcMain.on('vent_edit_envia', function(event, args){
     //Actualizamos datos de a tabla PROVEEDOR
     conexion.promise().execute('UPDATE proveedor SET nombreproveedor=? WHERE idproveedor=?',[args[0].nombreproveedor,args[0].idproveedor])
 
-    //[[args[0].idproducto]]
+
+    
+    //Refrescamos haciendo un nuevo llamado a la BD
+    conexion.query('SELECT * FROM productos',function(err, resultProd, fields){
+    //query para obtener el listado de proveedor y su ID
+    conexion.query('SELECT  p.idproveedor, p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor;', function(err, resultProv, fields){
+        ventanaProducto.reload();
+        })
+    }) 
+    //fin refrescar
+    
+
+
 })
 // FIN ventana editar
 

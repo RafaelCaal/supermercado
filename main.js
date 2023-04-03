@@ -139,13 +139,14 @@ ipcMain.on('enviaProveedor', function(event,args){
 //se reciben los cambios de la ventana editar y se actualiza tabla
 ipcMain.on('vent_edit_envia', function(event, args){
     console.log(args)
-    //var nombre = args[0].nombreproducto
+    //Actualizamos datos de a tabla PRODUCTOS
     conexion.promise().execute('UPDATE productos SET nombreproducto=? WHERE idproducto=?',[args[0].nombreproducto,args[0].idproducto])
     conexion.promise().execute('UPDATE productos SET descripcionproducto=? WHERE idproducto=?',[args[0].descripcionproducto,args[0].idproducto])
     conexion.promise().execute('UPDATE productos SET precioproducto=? WHERE idproducto=?',[args[0].precioproducto,args[0].idproducto])
     conexion.promise().execute('UPDATE productos SET categoria=? WHERE idproducto=?',[args[0].categoria,args[0].idproducto])
     conexion.promise().execute('UPDATE productos SET existencia=? WHERE idproducto=?',[args[0].existencia,args[0].idproducto])
-    
+    //Actualizamos datos de a tabla PROVEEDOR
+    conexion.promise().execute('UPDATE proveedor SET nombreproveedor=? WHERE idproveedor=?',[args[0].nombreproveedor,args[0].idproveedor])
 
     //[[args[0].idproducto]]
 })

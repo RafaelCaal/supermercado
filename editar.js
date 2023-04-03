@@ -90,27 +90,6 @@ window.comunicacion.recibeProveedor(function(event,args){
             }, "2000");
         }
 
-
-        /*
-        if(originNombre == tempNombre.value &&
-           originDescripcion == tempDescripcion.value &&
-           originPrecio == tempPrecio.value &&
-           originCategoria == tempCategoria.value &&
-           originProveedor == tempProveedor.value &&
-           originExistencia == tempExistencia.value){
-           cambio = false;
-           mensajeCambios.innerHTML = "No Hay Cambios"
-           setTimeout(() => {
-                mensajeCambios.innerHTML  = "  "
-           }, "2000");
-        }else{
-            cambio = true;
-            mensajeCambios.innerHTML = "Cambios Guardados!"
-            setTimeout(() => {
-                mensajeCambios.innerHTML  = "  "
-            }, "2000");
-        }
-        */
     })   
     
     /*

@@ -114,6 +114,7 @@ args[0] tambien recibe el nombre de la ventana args[1]
 que se solicita y ambos estan contenidos dentro de args
 */
 ipcMain.on('enviaProveedor', function(event,args){
+    console.log(args[0])
     console.log(args[1])
 
     //el usuario presiona el boton editar => abrimos ventana ediar
@@ -138,7 +139,15 @@ ipcMain.on('enviaProveedor', function(event,args){
 //se reciben los cambios de la ventana editar y se actualiza tabla
 ipcMain.on('vent_edit_envia', function(event, args){
     console.log(args)
+    //var nombre = args[0].nombreproducto
+    conexion.promise().execute('UPDATE productos SET nombreproducto=? WHERE idproducto=?',[args[0].nombreproducto,args[0].idproducto])
+    conexion.promise().execute('UPDATE productos SET descripcionproducto=? WHERE idproducto=?',[args[0].descripcionproducto,args[0].idproducto])
+    conexion.promise().execute('UPDATE productos SET precioproducto=? WHERE idproducto=?',[args[0].precioproducto,args[0].idproducto])
+    conexion.promise().execute('UPDATE productos SET categoria=? WHERE idproducto=?',[args[0].categoria,args[0].idproducto])
+    conexion.promise().execute('UPDATE productos SET existencia=? WHERE idproducto=?',[args[0].existencia,args[0].idproducto])
+    
 
+    //[[args[0].idproducto]]
 })
 // FIN ventana editar
 

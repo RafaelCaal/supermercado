@@ -1,5 +1,4 @@
 USE supermercadouno;
-TRUNCATE TABLE usuario;
 
 -- registramos el nombre de usuario y password
 TRUNCATE usuario;
@@ -7,6 +6,7 @@ INSERT INTO usuario(nomusuario, passusuario)
 VALUES ('tds', '$2b$10$8eC5neaeQ9xgSWu0Ieqziu7ymJgJgq4OulHpEtfSOiW9ECmNVMsJi');
 SELECT * FROM usuario;
  
+ -- llevanos con datos la tabla proveedor
 TRUNCATE proveedor;
 INSERT INTO proveedor(nombreproveedor, contactoproveedor, telefonoproveedor, correoproveedor)
 VALUES('FEMSA','Ana Rosales','54890987','anarosales@femsa.com'),
@@ -20,6 +20,7 @@ VALUES('FEMSA','Ana Rosales','54890987','anarosales@femsa.com'),
       ('Del Monte S,A.','Maria Pinto','41123432','mariapinto@delmonto.com');
 SELECT * FROM proveedor;
 
+-- llenamos con datos la tabla productos
 TRUNCATE productos;
 INSERT INTO productos(nombreproducto, descripcionproducto, precioproducto, categoria, idproveedor, existencia)    
 VALUES ('Coca cola Lata 8 oz','Coca Cola Sabor Original','6.80','Bebidas Carbonatadas','1','400'),
@@ -33,9 +34,8 @@ VALUES ('Coca cola Lata 8 oz','Coca Cola Sabor Original','6.80','Bebidas Carbona
        ('Frijoles Lata 7g','Frijoles parados con chorizo','7.00','Comida enlatada','9','200');
 SELECT * FROM productos;  
 
--- no funciona
-SET @pruebas = (SELECT p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor);
-
 -- obtenemos todos los proveedores en una sola lista
 SELECT  p.idproveedor, p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor;
 
+-- no funciona
+-- SET @pruebas = (SELECT p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor);

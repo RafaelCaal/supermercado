@@ -52,7 +52,7 @@ salir.addEventListener("click", function(event, args){
 
 
 /*
-//datos de prueba en formato JSON
+//datos de prueba en formato JSON entregable 2
 var productos = [
     {
         "codigo": "10001",

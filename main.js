@@ -147,9 +147,7 @@ ipcMain.on('vent_edit_envia', function(event, args){
     conexion.promise().execute('UPDATE productos SET existencia=? WHERE idproducto=?',[args[0].existencia,args[0].idproducto])
     //Actualizamos datos de a tabla PROVEEDOR
     conexion.promise().execute('UPDATE proveedor SET nombreproveedor=? WHERE idproveedor=?',[args[0].nombreproveedor,args[0].idproveedor])
-
-
-    
+   
     //Refrescamos haciendo un nuevo llamado a la BD
     conexion.query('SELECT * FROM productos',function(err, resultProd, fields){
     //query para obtener el listado de proveedor y su ID
@@ -176,6 +174,14 @@ function createWindowCuatro(){
 // recibe el pedido desde la interface
 ipcMain.on('realiza_pedido',function(event,args){
     console.log(args)
+    var pedProdID = args.pedIdProd
+    var pedNomProd = args.pedNomProd
+    var pedIdProv = args.pedIdProv
+    var pedNomProv = args.pedNomProv
+    var pedCantidad = args.pedCantidad
+    console.log(pedProdID, ' ', pedNomProd, ' ', pedIdProv, ' ', pedNomProv, ' ', pedCantidad)
+    
+    conexion.promise().execute('INSERT INTO pedido(idproducto, nombreProducto, idProveedor, nombreProveedor, cantidad, usuario) VALUES(?,?,?,?,?, CURRENT_USER) ', [pedProdID, pedNomProd, pedIdProv, pedNomProv, pedCantidad])
 })
 
 // FIN ventana realizar pedido
@@ -183,9 +189,10 @@ ipcMain.on('realiza_pedido',function(event,args){
 app.whenReady().then(createWindow)
 
 
-//PRUEBAS
-
-//Prueba: query para obtener el listado de proveedor y su 
+/**
+ * Pruebas
+ */
+//query para obtener el listado de proveedor y su ID
 conexion.query(
     'SELECT  p.idproveedor, p.nombreproveedor FROM proveedor AS p INNER JOIN productos AS pr ON p.idproveedor = pr.idproveedor;',
     function(err, result, fields){
@@ -196,7 +203,6 @@ conexion.query(
         //console.log(fields)
     }
 )
-
 //primer query de prueba
 conexion.query(
     'SELECT * FROM usuario',

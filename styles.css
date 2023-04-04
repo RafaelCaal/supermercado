@@ -123,6 +123,19 @@
     transform: translate(-50%, -50%);
     margin: 0 auto;
 }
+
+#mensajePedido{
+    position: fixed;
+    text-align: center; 
+    font-weight: bold;
+    font-size: large;
+    color: red;
+    left: 50%;
+    bottom: 30%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
 /* INICIO ventana pedido */
 
 

@@ -37,31 +37,19 @@ CREATE TABLE productos(
 
 DROP TABLE IF EXISTS pedido;
 CREATE TABLE pedido(
-	idpedido INT NOT NULL AUTO_INCREMENT,
-    idproducto INT NOT NULL,
-    nombreproducto VARCHAR(255) NOT NULL,
-    idproveedor INT NOT NULL,
-	nombreproveedor VARCHAR(255) NOT NULL,
-    cantidadpedido INT NOT NULL, 
-    usuariopedido VARCHAR(255) NOT NULL,
-    PRIMARY KEY(idpedido),
-    FOREIGN KEY(idproducto) REFERENCES producto(idproducto),
-    FOREIGN KEY(idproveedor) REFERENCES proveedor(idproveedor)
-);
-
-DROP TABLE IF EXISTS orden;
-CREATE TABLE orden(
 	idorden INT NOT NULL AUTO_INCREMENT,
 	idproducto INT NOT NULL,
     nombreProducto VARCHAR(255),
     idProveedor INT NOT NULL,
 	nombreProveedor VARCHAR(255),
     cantidad INT NOT NULL,
+    fechaPedido TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario VARCHAR(255) NOT NULL,
     PRIMARY KEY (idorden)
 );
 
 
-
+/*
 -- TABLA pruebas
 DROP TABLE IF EXISTS pruebas;
 CREATE TABLE pruebas(
@@ -78,6 +66,5 @@ UPDATE pruebas SET
 	datoUno = 'cambio',
     datoDos = 'otro cambio'
     WHERE idpruebas = '1';
-	
-
+*/
 
